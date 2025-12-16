@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedGo | Dorilarni Tez Yetkazish Xizmati</title>
+    <meta name="description" content="MedGo — O'zbekistonda dorilarni uyga tez va xavfsiz yetkazib berish xizmati. Dorixonalarni solishtirish va buyurtma berish.">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        // Ranglar professional ko'rinish uchun optimallashtirildi
+                        'medgo-primary': '#065f46', // To'qroq, ishonchli yashil (Emerald-800)
+                        'medgo-secondary': '#10b981', // Ochiq urg'u yashil (Emerald-500)
+                        'medgo-text': '#111827', // To'q kulrang
+                        'medgo-background': '#f0fdfa', // Juda ochiq yashil fon (Emerald-50)
+                        'medgo-dark-background': '#0f172a', // Qorong'u fon (Slate-900)
+                        'medgo-dark-card': '#1e293b', // Qorong'u karta foni (Slate-800)
+                        'medgo-rating': '#fbbf24', // Sariq (Star rating)
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05)',
+                        'xl-green': '0 20px 25px -5px rgba(6, 95, 70, 0.1), 0 10px 10px -5px rgba(6, 95, 70, 0.04)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        .animate-title-in {
+            animation: fadeInDown 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+        }
+        .animate-zoom-in {
+            animation: zoomIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) both;
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes zoomIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .btn-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(6, 95, 70, 0.3);
+            transition: all 0.3s ease-in-out;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease-in-out;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-medgo-background dark:bg-medgo-dark-background text-medgo-text dark:text-gray-200 antialiased transition-colors duration-300">
+
+    <header class="sticky top-0 z-50 bg-white/95 dark:bg-medgo-dark-background/95 backdrop-blur-sm shadow-md">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+            <a href="#" class="flex items-center space-x-2">
+                <i data-lucide="heart-pulse" class="w-8 h-8 text-medgo-primary"></i>
+                <span class="text-xl font-bold text-medgo-text dark:text-gray-100">MedGo</span>
+            </a>
+            <div class="flex items-center space-x-4">
+                <nav class="hidden md:flex space-x-6 text-medgo-text dark:text-gray-300 font-medium">
+                    <a href="#dorilar" class="hover:text-medgo-secondary transition-colors">💊 Dorilar</a>
+                    <a href="#dorixonalar" class="hover:text-medgo-secondary transition-colors">🏪 Dorixonalar</a>
+                    <a href="#ishlash-prinsipi" class="hover:text-medgo-secondary transition-colors">Prinsip</a>
+                </nav>
+                <button id="theme-toggle" aria-label="Mavzu almashtirgich" class="p-2 rounded-full transition-colors duration-300 hover:bg-gray-200 dark:hover:bg-gray-700 text-medgo-text dark:text-gray-200">
+                    <i data-lucide="moon" id="moon-icon" class="w-6 h-6 hidden"></i>
+                    <i data-lucide="sun" id="sun-icon" class="w-6 h-6 hidden"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="pt-16 pb-12 sm:pt-24 sm:pb-16 dark:bg-medgo-dark-background" id="xizmat">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="animate-title-in text-4xl sm:text-5xl lg:text-6xl font-extrabold text-medgo-text dark:text-white leading-tight mb-4" style="animation-delay: 0.1s;">
+                    <span class="text-medgo-primary">Tezkor Yordam</span> Bir Zoomda!
+                </h1>
+                <p class="animate-title-in mt-4 text-xl text-gray-700 dark:text-gray-300 max-w-2xl mx-auto" style="animation-delay: 0.3s;">
+                    Eng yaqin dorixonalarni toping, narxlarni solishtiring va doringizni **30 daqiqada** qabul qiling.
+                </p>
+                <div class="animate-zoom-in mt-10 max-w-xl mx-auto flex shadow-xl-green rounded-full bg-white dark:bg-medgo-dark-card p-2 border-2 border-medgo-primary/20" style="animation-delay: 0.5s;">
+                    <input type="text" placeholder="Qidiruv: Dori nomi, simptom yoki joylashuv..." class="w-full px-6 py-3 text-lg rounded-full focus:outline-none bg-transparent dark:text-gray-200" />
+                    <button class="flex items-center justify-center px-6 py-3 text-base font-medium rounded-full text-white bg-medgo-primary hover:bg-medgo-secondary transition-colors duration-300 btn-hover">
+                        <i data-lucide="search" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+        
+        <section class="py-16 bg-white dark:bg-medgo-dark-card" id="dorilar">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-extrabold text-medgo-text dark:text-white mb-8 border-l-4 border-medgo-primary pl-4">
+                    💊 Eng Ko'p Buyurtma Qilingan Dorilar
+                </h2>
+                
+                <div id="medicine-list" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    </div>
+                
+                <div class="text-center mt-12">
+                     <a href="#" class="btn-hover inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-full shadow-md text-white bg-medgo-secondary hover:bg-medgo-primary transition-colors duration-300">
+                        Barcha Dorilar Katalogini Ko'rish
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 dark:bg-medgo-dark-background" id="dorixonalar">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-extrabold text-medgo-text dark:text-white mb-8 border-l-4 border-medgo-secondary pl-4">
+                    🏪 Yaqin Dorixonalar Ro'yxati
+                </h2>
+                
+                <div id="pharmacy-list" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    </div>
+            </div>
+        </section>
+
+        <section class="py-16 sm:py-24 bg-medgo-background dark:bg-medgo-dark-card" id="ishlash-prinsipi">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-medgo-text dark:text-white mb-4">
+                    Buyurtma Berish Qadamlari
+                </h2>
+                <p class="text-lg text-gray-700 dark:text-gray-400 mb-12 max-w-3xl mx-auto">
+                    Dorixonani tanlang va 3 oddiy qadamda doringizni oling.
+                </p>
+                
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="card-hover p-8 bg-white dark:bg-medgo-dark-background rounded-xl shadow-soft dark:shadow-lg">
+                        <div class="p-4 inline-flex rounded-full bg-medgo-primary/10 mb-6">
+                            <i data-lucide="search" class="w-8 h-8 text-medgo-primary"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-medgo-text dark:text-white mb-3">1. Dori/Dorixona Qidirish</h3>
+                        <p class="text-gray-600 dark:text-gray-400">
+                            Kerakli dorini qidiring yoki eng yaxshi reytingli dorixonani tanlang.
+                        </p>
+                    </div>
+                    <div class="card-hover p-8 bg-white dark:bg-medgo-dark-background rounded-xl shadow-soft dark:shadow-lg">
+                        <div class="p-4 inline-flex rounded-full bg-blue-500/10 mb-6">
+                            <i data-lucide="shopping-cart" class="w-8 h-8 text-blue-500"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-medgo-text dark:text-white mb-3">2. Savatni Tasdiqlash</h3>
+                        <p class="text-gray-600 dark:text-gray-400">
+                            Buyurtmangizni rasmiylashtiring, manzil va toʻlov usulini tanlang.
+                        </p>
+                    </div>
+                    <div class="card-hover p-8 bg-white dark:bg-medgo-dark-background rounded-xl shadow-soft dark:shadow-lg">
+                        <div class="p-4 inline-flex rounded-full bg-orange-500/10 mb-6">
+                            <i data-lucide="send" class="w-8 h-8 text-orange-500"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-medgo-text dark:text-white mb-3">3. Tez Yetkazish</h3>
+                        <p class="text-gray-600 dark:text-gray-400">
+                            Kuryer dorilarni belgilangan muddatda eshigingizga tez va xavfsiz olib keladi.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 sm:py-24 bg-medgo-primary dark:bg-medgo-secondary">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <div class="max-w-4xl mx-auto bg-white dark:bg-medgo-dark-card p-8 sm:p-12 rounded-2xl shadow-2xl">
+                    <i data-lucide="alert-triangle" class="w-12 h-12 text-red-500 mx-auto mb-4 animate-pulse"></i>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-medgo-text dark:text-white mb-4">
+                        Sog'ligingizni kechiktirmang!
+                    </h2>
+                    <p class="text-lg text-gray-700 dark:text-gray-300 mb-8">
+                        Faqat litsenziyalangan dorixonalar va professional xizmat.
+                    </p>
+                    <a href="#dorixonalar" class="btn-hover inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-medium rounded-full shadow-lg text-medgo-primary bg-yellow-400 hover:bg-yellow-500 transition-colors duration-300">
+                        <i data-lucide="zap" class="w-5 h-5 mr-2"></i>
+                        Hozir Buyurtma Berish
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-medgo-dark-card dark:bg-black border-t border-gray-700/50 py-10" id="aloqa">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-8 border-b border-gray-700 pb-8 mb-8">
+                <div class="col-span-2 md:col-span-2">
+                    <a href="#" class="flex items-center space-x-2 mb-4">
+                        <i data-lucide="heart-pulse" class="w-8 h-8 text-medgo-secondary"></i>
+                        <span class="text-2xl font-bold text-white">MedGo</span>
+                    </a>
+                    <p class="text-gray-400 text-sm max-w-xs">
+                        Sog'ligingizga g'amxo'rlik qilishda sizning ishonchli hamkorlaringiz.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Kompaniya</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-medgo-secondary transition-colors text-sm">Biz haqimizda</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-medgo-secondary transition-colors text-sm">Hamkorlik</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-medgo-secondary transition-colors text-sm">Vakansiyalar</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Yordam</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-medgo-secondary transition-colors text-sm">FAQ</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-medgo-secondary transition-colors text-sm">Yetkazish</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-medgo-secondary transition-colors text-sm">Maxfiylik siyosati</a></li>
+                    </ul>
+                </div>
+                <div class="col-span-2 md:col-span-1">
+                    <h3 class="text-lg font-semibold text-white mb-4">Bog'lanish</h3>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li class="flex items-center">
+                            <i data-lucide="mail" class="w-4 h-4 mr-2 text-medgo-secondary"></i>
+                            <a href="mailto:info@medgo.uz" class="hover:text-medgo-secondary transition-colors">info@medgo.uz</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-lucide="phone" class="w-4 h-4 mr-2 text-medgo-secondary"></i>
+                            <a href="tel:+998711234567" class="hover:text-medgo-secondary transition-colors">+998 (71) 123-45-67</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="flex justify-center">
+                <p class="text-center text-gray-500 text-sm">
+                    &copy; <span id="current-year"></span> MedGo. Barcha huquqlar himoyalangan.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 1. Lucide iconlarni render qilish
+        lucide.createIcons();
+
+        // 2. Dorixonalar ma'lumotlari
+        const pharmacies = [
+            { name: "Global Pharma", rating: 4.8, minDeliveryTime: 25, deliveryPrice: 15000, distance: 1.2, image: 'building-2' },
+            { name: "Asal Dorixona (Bepul)", rating: 4.5, minDeliveryTime: 35, deliveryPrice: 0, distance: 3.5, image: 'home' },
+            { name: "Shifo Maskani", rating: 4.9, minDeliveryTime: 20, deliveryPrice: 20000, distance: 0.8, image: 'store' },
+            { name: "Green Leaf Farm", rating: 4.2, minDeliveryTime: 40, deliveryPrice: 10000, distance: 5.0, image: 'leaf' },
+        ];
+
+        // 3. Dorilar ma'lumotlari (Yangi qism)
+        const medicines = [
+            { name: "Paracetamol", price: 3500, type: "Og'riq qoldiruvchi", image: 'tablet' },
+            { name: "Amoksitsillin", price: 18000, type: "Antibiotik", image: 'injection' },
+            { name: "Aspirin", price: 7000, type: "Isitmani tushiruvchi", image: 'pill' },
+            { name: "Vitamin C", price: 12500, type: "Immun tizimi", image: 'chef-hat' },
+        ];
+
+        // 4. Dorixona ro'yxatini HTMLga joylash funksiyasi
+        const renderPharmacies = () => {
+            const listContainer = document.getElementById('pharmacy-list');
+            listContainer.innerHTML = ''; 
+
+            pharmacies.forEach(pharmacy => {
+                const deliveryInfo = pharmacy.deliveryPrice === 0 
+                    ? `<span class="text-medgo-secondary font-semibold">Bepul</span>`
+                    : `<span class="font-semibold text-medgo-text dark:text-white">${pharmacy.deliveryPrice.toLocaleString('uz-UZ')} so'm</span>`;
+                
+                const html = `
+                    <a href="#" class="card-hover block bg-white dark:bg-medgo-dark-card rounded-xl shadow-soft dark:shadow-lg overflow-hidden transition-all duration-300 border-t-4 border-medgo-primary/50">
+                        <div class="p-5">
+                            <i data-lucide="${pharmacy.image}" class="w-8 h-8 text-medgo-primary mb-3"></i>
+                            <h3 class="text-xl font-bold text-medgo-text dark:text-white mb-2">${pharmacy.name}</h3>
+                            
+                            <div class="flex items-center mb-3">
+                                <i data-lucide="star" class="w-4 h-4 fill-medgo-rating text-medgo-rating mr-1"></i>
+                                <span class="text-sm font-semibold text-medgo-text dark:text-white">${pharmacy.rating.toFixed(1)}</span>
+                                <span class="text-xs text-gray-500 ml-2">(${Math.round(pharmacy.rating * 10)} ta fikr)</span>
+                            </div>
+                            
+                            <div class="flex justify-between text-sm mt-4 pt-3 border-t border-gray-100 dark:border-gray-700">
+                                <div>
+                                    <p class="text-gray-500 dark:text-gray-400">Tezlik</p>
+                                    <p class="font-bold text-medgo-text dark:text-white">${pharmacy.minDeliveryTime}+ min</p>
+                                </div>
+                                <div>
+                                    <p class="text-gray-500 dark:text-gray-400">Yetkazish</p>
+                                    ${deliveryInfo}
+                                </div>
+                                <div>
+                                    <p class="text-gray-500 dark:text-gray-400">Masofa</p>
+                                    <p class="font-bold text-medgo-text dark:text-white">${pharmacy.distance.toFixed(1)} km</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                `;
+                listContainer.insertAdjacentHTML('beforeend', html);
+            });
+            lucide.createIcons();
+        };
+
+        // 5. Dorilar ro'yxatini HTMLga joylash funksiyasi (Yangi)
+        const renderMedicines = () => {
+            const listContainer = document.getElementById('medicine-list');
+            listContainer.innerHTML = '';
+
+            medicines.forEach(medicine => {
+                const html = `
+                    <div class="card-hover p-5 bg-white dark:bg-medgo-dark-background rounded-xl shadow-soft dark:shadow-lg transition-all duration-300">
+                        <div class="flex justify-between items-start mb-3">
+                            <i data-lucide="${medicine.image}" class="w-8 h-8 text-medgo-secondary"></i>
+                            <span class="text-xs font-medium text-medgo-primary bg-medgo-primary/10 px-3 py-1 rounded-full">${medicine.type}</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-medgo-text dark:text-white mb-1">${medicine.name}</h3>
+                        <p class="text-2xl font-extrabold text-red-600 dark:text-red-400 mt-3">
+                            ${medicine.price.toLocaleString('uz-UZ')} <span class="text-base text-gray-500">so'm</span>
+                        </p>
+                        <button class="w-full mt-4 py-2 bg-medgo-primary text-white rounded-lg hover:bg-medgo-secondary transition-colors duration-300 text-sm font-medium">
+                            Savatga qo'shish
+                        </button>
+                    </div>
+                `;
+                listContainer.insertAdjacentHTML('beforeend', html);
+            });
+            lucide.createIcons();
+        };
+
+        // 6. Dark Mode Logic
+        const themeToggle = document.getElementById('theme-toggle');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+        const html = document.documentElement;
+
+        const setIcons = (isDark) => {
+            if (isDark) {
+                moonIcon.classList.remove('hidden');
+                sunIcon.classList.add('hidden');
+            } else {
+                moonIcon.classList.add('hidden');
+                sunIcon.classList.remove('hidden');
+            }
+        };
+
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+            html.classList.add(currentTheme);
+            setIcons(currentTheme === 'dark');
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            html.classList.add('dark');
+            setIcons(true);
+        } else {
+             html.classList.add('light');
+             setIcons(false);
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const isDark = html.classList.contains('dark');
+            if (isDark) {
+                html.classList.remove('dark');
+                html.classList.add('light');
+                localStorage.setItem('theme', 'light');
+                setIcons(false);
+            } else {
+                html.classList.remove('light');
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                setIcons(true);
+            }
+        });
+
+        // 7. Yil va Ma'lumotlarni yuklash
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        document.addEventListener('DOMContentLoaded', () => {
+            renderPharmacies();
+            renderMedicines();
+        });
+    </script>
+</body>
+</html>
