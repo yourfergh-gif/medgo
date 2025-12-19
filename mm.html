@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zubayr | Premium iOS Glass Portfolio</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <style>
+    :root{
+      --glass-bg: rgba(255,255,255,0.12);
+      --glass-border: rgba(255,255,255,0.25);
+      --accent: #7cf6ff;
+      --accent2: #9b8cff;
+      --dark: #05060f;
+    }
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Montserrat',sans-serif;
+    }
+
+    body{
+      background: radial-gradient(circle at top, #0d1430, #04050c);
+      color:#fff;
+      overflow-x:hidden;
+    }
+
+    /* ===== Ambient Blur ===== */
+    .orb{
+      position:fixed;
+      width:400px;
+      height:400px;
+      background:radial-gradient(circle, rgba(255,255,255,0.35), transparent 70%);
+      filter:blur(90px);
+      animation:float 18s infinite alternate ease-in-out;
+      z-index:0;
+    }
+    .orb.one{top:5%;left:10%;}
+    .orb.two{bottom:10%;right:15%;animation-delay:4s;}
+
+    @keyframes float{
+      from{transform:translate(0,0)}
+      to{transform:translate(80px,-60px)}
+    }
+
+    /* ===== Hero ===== */
+    .hero{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:40px 20px;
+      position:relative;
+      z-index:2;
+    }
+
+    .hero-card{
+      max-width:480px;
+      width:100%;
+      background:linear-gradient(180deg, rgba(255,255,255,0.22), rgba(255,255,255,0.08));
+      backdrop-filter:blur(28px) saturate(160%);
+      -webkit-backdrop-filter:blur(28px) saturate(160%);
+      border:1px solid var(--glass-border);
+      border-radius:36px;
+      padding:38px 30px;
+      text-align:center;
+      box-shadow:0 40px 80px rgba(0,0,0,0.55);
+      animation:enter 1.3s ease;
+      transform-style:preserve-3d;
+    }
+
+    @keyframes enter{
+      from{opacity:0;transform:translateY(60px) scale(0.92)}
+      to{opacity:1;transform:none}
+    }
+
+    /* ===== Avatar ===== */
+    .avatar-wrap{
+      width:150px;
+      height:150px;
+      margin:0 auto 24px;
+      border-radius:50%;
+      padding:4px;
+      background:linear-gradient(135deg,var(--accent),var(--accent2),#ff8ddb);
+    }
+    .avatar{
+      width:100%;
+      height:100%;
+      border-radius:50%;
+      overflow:hidden;
+      background:#111;
+    }
+    .avatar img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    h1{
+      font-size:2.8rem;
+      font-weight:900;
+      letter-spacing:2px;
+      margin-bottom:6px;
+    }
+
+    .subtitle{
+      opacity:.85;
+      margin-bottom:24px;
+    }
+
+    .socials{
+      display:flex;
+      justify-content:center;
+      gap:16px;
+      margin-bottom:30px;
+    }
+
+    .socials a{
+      width:56px;
+      height:56px;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
+      font-size:1.4rem;
+      background:var(--glass-bg);
+      border:1px solid var(--glass-border);
+      backdrop-filter:blur(12px);
+      transition:.35s;
+    }
+
+    .socials a:hover{
+      transform:translateY(-6px) scale(1.1);
+      background:rgba(255,255,255,0.35);
+      box-shadow:0 15px 30px rgba(0,0,0,.45);
+    }
+
+    /* ===== Gallery ===== */
+    .gallery{
+      padding:100px 8%;
+      position:relative;
+      z-index:2;
+    }
+
+    .gallery h2{
+      text-align:center;
+      font-size:2.4rem;
+      margin-bottom:60px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:30px;
+    }
+
+    .glass-card{
+      height:380px;
+      border-radius:26px;
+      overflow:hidden;
+      background:var(--glass-bg);
+      backdrop-filter:blur(22px);
+      border:1px solid var(--glass-border);
+      transition:.5s;
+    }
+
+    .glass-card img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition:.6s;
+    }
+
+    .glass-card:hover img{
+      transform:scale(1.12);
+    }
+
+    footer{
+      padding:50px 20px;
+      text-align:center;
+      opacity:.6;
+      border-top:1px solid rgba(255,255,255,.1);
+    }
+
+    @media(max-width:600px){
+      h1{font-size:2.2rem}
+    }
+  </style>
+</head>
+<body>
+
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-card" id="tilt" data-aos="zoom-in">
+
+      <div class="avatar-wrap">
+        <div class="avatar">
+          <!-- O'Z RASMINI SHU YERGA QO'Y -->
+          <img src="https://yt3.googleusercontent.com/n1A6yRKjgBxxaEgNpkHta0EYlSlDh6vBWJeZAenYxXn_Huhe1Wc3FUMDAZurJYHWPlkzjmKxQg=s900-c-k-c0x00ffffff-no-rj" alt="Zubayr">
+        </div>
+      </div>
+
+      <h1>ZUBAYR</h1>
+      <p class="subtitle">Boshqachadur baribir Ular Qushlar kelib Qo'nmagan Gullar</p>
+
+      <div class="socials">
+        <a href="https://t.me/Zubayr_pg" target="_blank"><i class="fab fa-telegram"></i></a>
+        <a href="https://www.instagram.com/zubayr_.pg?igsh=MTFyeG1waHk2OXA0cw==" target="_blank"><i class="fab fa-instagram"></i></a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="gallery">
+    <h2 data-aos="fade-up">Status  
+
+
+Kim bilan aloqani uzgan bo’lsak, o’zingiz shunga loyiq edingiz❗️
+Biz o’zgarmadik, sizni yaxshiroq tanidik..📌</h2>
+
+
+
+  <footer> Zubayr • FeroXonim </footer>
+
+  <!-- JS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({duration:1000,once:true});
+
+    // iOS-style tilt
+    const card=document.getElementById('tilt');
+    document.addEventListener('mousemove',e=>{
+      const x=(window.innerWidth/2-e.clientX)/30;
+      const y=(window.innerHeight/2-e.clientY)/30;
+      card.style.transform=`rotateY(${x}deg) rotateX(${y}deg)`;
+    });
+    document.addEventListener('mouseleave',()=>{
+      card.style.transform='rotateY(0) rotateX(0)';
+    });
+  </script>
+</body>
+</html>
